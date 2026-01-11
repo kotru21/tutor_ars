@@ -21,19 +21,6 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* Quick Navigation */}
-      {isAuthenticated && (
-        <section className="mb-8">
-          <div className="rounded-lg bg-white p-6 shadow-md">
-            <h2 className="mb-4 text-xl font-bold text-heading">🚀 Быстрый переход</h2>
-            <p className="mb-4 text-sm text-gray-600">
-              Введите код урока (например: 7-1, 8-3, 10-2) для быстрого перехода
-            </p>
-            <QuickNavForm />
-          </div>
-        </section>
-      )}
-
       {/* Grades Grid */}
       <section>
         <h2 className="mb-6 text-2xl font-bold text-heading">Выберите класс</h2>
@@ -62,25 +49,5 @@ export default async function HomePage() {
         </section>
       )}
     </div>
-  );
-}
-
-function QuickNavForm() {
-  return (
-    <form action="/api/quick-nav" method="GET" className="flex gap-4">
-      <input
-        type="text"
-        name="code"
-        placeholder="Например: 7-1"
-        className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-        pattern="^\d{1,2}-\d{1,2}$"
-      />
-      <button
-        type="submit"
-        className="rounded-lg bg-primary px-6 py-2 font-medium text-white hover:bg-primary-dark"
-      >
-        Перейти
-      </button>
-    </form>
   );
 }
