@@ -84,6 +84,8 @@ export const LESSONS: Lesson[] = [
     order: 2,
   },
   { id: '8-3', title: 'Функции', slug: 'funktsii-raznye', gradeId: '8', order: 3 },
+  { id: '8-4', title: 'Квадратичные неравенства', slug: 'kv-ner', gradeId: '8', order: 4 },
+  { id: '8-5', title: 'Квадратичная функция', slug: 'kv-func', gradeId: '8', order: 5 },
 
   // 9 класс
   {
