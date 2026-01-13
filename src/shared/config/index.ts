@@ -156,6 +156,38 @@ export const LESSONS: Lesson[] = [
     gradeId: '11',
     order: 4,
   },
+
+  {
+    id: '11-5',
+    title: 'Показательные неравенства',
+    slug: 'pok-ner',
+    gradeId: '11',
+    order: 5,
+  },
+
+  {
+    id: '11-6',
+    title: 'Логарифм',
+    slug: 'log',
+    gradeId: '11',
+    order: 6,
+  },
+
+  {
+    id: '11-7',
+    title: 'Логарифмическая функция',
+    slug: 'log-func',
+    gradeId: '11',
+    order: 7,
+  },
+
+  {
+    id: '11-8',
+    title: 'Логарифмические уравнения',
+    slug: '1',
+    gradeId: '11',
+    order: 8,
+  },
 ];
 
 export function getLessonsByGrade(gradeId: string): Lesson[] {
