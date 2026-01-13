@@ -132,6 +132,30 @@ export const LESSONS: Lesson[] = [
     gradeId: '11',
     order: 1,
   },
+
+  {
+    id: '11-2',
+    title: 'Степенная функция',
+    slug: 'step-func',
+    gradeId: '11',
+    order: 2,
+  },
+
+  {
+    id: '11-3',
+    title: 'Показательная функция',
+    slug: 'pok-func',
+    gradeId: '11',
+    order: 3,
+  },
+
+  {
+    id: '11-4',
+    title: 'Показательные уравнения',
+    slug: 'pok-yravn',
+    gradeId: '11',
+    order: 4,
+  },
 ];
 
 export function getLessonsByGrade(gradeId: string): Lesson[] {
