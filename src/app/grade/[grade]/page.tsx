@@ -9,12 +9,12 @@ import type { Metadata } from 'next';
 
 function getLessonWord(count: number): string {
   if (count === 1) {
-    return 'урок';
+    return 'тема';
   }
   if (count < 5) {
-    return 'урока';
+    return 'темы';
   }
-  return 'уроков';
+  return 'тем';
 }
 
 interface GradePageProps {

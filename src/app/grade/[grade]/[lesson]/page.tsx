@@ -80,7 +80,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
       {/* Lesson Number Badge */}
       <div className="mb-4">
         <span className="inline-block rounded-full bg-primary px-3 py-1 text-sm font-medium text-white">
-          Урок {lessonMeta.order}
+          Тема {lessonMeta.order}
         </span>
       </div>
 

@@ -207,12 +207,21 @@ export const LESSONS: Lesson[] = [
     order: 9,
   },
 
+  // РТ
   {
     id: '21',
-    title: 'РТ 1',
-    slug: 'rt-2026-kedr',
+    title: 'РТ 1/1',
+    slug: 'rt-1-1',
     gradeId: '21',
     order: 1,
+  },
+
+  {
+    id: '22',
+    title: 'РТ 1/2',
+    slug: 'rt-1-2',
+    gradeId: '21',
+    order: 2,
   },
 ];
 
