@@ -5,12 +5,12 @@ import { Card } from '@/shared/ui';
 
 function getLessonWord(count: number): string {
   if (count === 1) {
-    return 'урок';
+    return 'тема';
   }
   if (count < 5) {
-    return 'урока';
+    return 'тем';
   }
-  return 'уроков';
+  return 'тем';
 }
 
 interface GradeCardProps {

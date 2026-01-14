@@ -16,26 +16,72 @@ export default async function HomePage() {
           📐 Математика | Репетитор
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-gray-600">
-          Добро пожаловать на обучающий сайт по математике! Выберите класс, чтобы начать изучение
+          Добро пожаловать на обучающий сайт по математике! Выберите тему, чтобы начать изучение
           материала.
         </p>
       </section>
 
       {/* Grades Grid */}
       <section>
-        <h2 className="mb-6 text-2xl font-bold text-heading">Выберите класс</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {GRADES.map((grade) => {
-            const lessons = getLessonsByGrade(grade.id);
-            return (
-              <GradeCard
-                key={grade.id}
-                grade={grade}
-                lessonsCount={lessons.length}
-                isLocked={!isAuthenticated}
-              />
-            );
-          })}
+        <h2 className="mb-6 text-2xl font-bold text-heading">Выберите модуль</h2>
+
+        {/* Алгебра */}
+        <div className="mb-8">
+          <h3 className="mb-4 text-xl font-semibold text-heading">Алгебра</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {GRADES.filter((grade) => ['5-6', '7', '8', '9', '10', '11'].includes(grade.id)).map(
+              (grade) => {
+                const lessons = getLessonsByGrade(grade.id);
+                return (
+                  <GradeCard
+                    key={grade.id}
+                    grade={grade}
+                    lessonsCount={lessons.length}
+                    isLocked={!isAuthenticated}
+                  />
+                );
+              }
+            )}
+          </div>
+        </div>
+
+        {/* Геометрия */}
+        <div>
+          <h3 className="mb-4 text-xl font-semibold text-heading">Геометрия</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {GRADES.filter((grade) => ['12', '13', '14', '15', '16'].includes(grade.id)).map(
+              (grade) => {
+                const lessons = getLessonsByGrade(grade.id);
+                return (
+                  <GradeCard
+                    key={grade.id}
+                    grade={grade}
+                    lessonsCount={lessons.length}
+                    isLocked={!isAuthenticated}
+                  />
+                );
+              }
+            )}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-xl font-semibold text-heading">Экзаменационные материалы</h3>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {GRADES.filter((grade) => ['17', '18', '19', '20', '21'].includes(grade.id)).map(
+              (grade) => {
+                const lessons = getLessonsByGrade(grade.id);
+                return (
+                  <GradeCard
+                    key={grade.id}
+                    grade={grade}
+                    lessonsCount={lessons.length}
+                    isLocked={!isAuthenticated}
+                  />
+                );
+              }
+            )}
+          </div>
         </div>
       </section>
 

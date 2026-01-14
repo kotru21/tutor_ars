@@ -7,12 +7,22 @@ export const SITE_CONFIG = {
 } as const;
 
 export const GRADES: Grade[] = [
-  { id: '5-6', name: '5-6 класс', slug: '5-6-klass', order: 1 },
-  { id: '7', name: '7 класс', slug: '7-klass', order: 2 },
-  { id: '8', name: '8 класс', slug: '8-klass', order: 3 },
-  { id: '9', name: '9 класс', slug: '9-klass', order: 4 },
-  { id: '10', name: '10 класс', slug: '10-klass', order: 5 },
-  { id: '11', name: '11 класс', slug: '11-klass', order: 6 },
+  { id: '5-6', name: 'Математика 5-6 класс', slug: '5-6-klass', order: 1 },
+  { id: '7', name: 'Алгебра 7 класс', slug: '7-klass', order: 2 },
+  { id: '8', name: 'Алгебра 8 класс', slug: '8-klass', order: 3 },
+  { id: '9', name: 'Алгебра 9 класс', slug: '9-klass', order: 4 },
+  { id: '10', name: 'Алгебра 10 класс', slug: '10-klass', order: 5 },
+  { id: '11', name: 'Алгебра 11 класс', slug: '11-klass', order: 6 },
+  { id: '12', name: 'Геометрия 7 класс', slug: '7-klass', order: 7 },
+  { id: '13', name: 'Геометрия 8 класс', slug: '8-klass', order: 8 },
+  { id: '14', name: 'Геометрия 9 класс', slug: '9-klass', order: 9 },
+  { id: '15', name: 'Геометрия 10 класс', slug: '10-klass', order: 10 },
+  { id: '16', name: 'Геометрия 11 класс', slug: '11-klass', order: 11 },
+  { id: '17', name: 'ЦТ', slug: '11-klass', order: 12 },
+  { id: '18', name: 'ЦЭ', slug: '11-klass', order: 13 },
+  { id: '19', name: 'РЦЭ', slug: '11-klass', order: 13 },
+  { id: '20', name: 'ДРТ', slug: '11-klass', order: 14 },
+  { id: '21', name: 'РТ', slug: 'rt', order: 15 },
 ];
 
 export const LESSONS: Lesson[] = [
@@ -187,6 +197,22 @@ export const LESSONS: Lesson[] = [
     slug: '1',
     gradeId: '11',
     order: 8,
+  },
+
+  {
+    id: '11-9',
+    title: 'Логарифмические неравенства',
+    slug: 'log-ner',
+    gradeId: '11',
+    order: 9,
+  },
+
+  {
+    id: '21',
+    title: 'РТ 1',
+    slug: 'rt-2026-kedr',
+    gradeId: '21',
+    order: 1,
   },
 ];
 
