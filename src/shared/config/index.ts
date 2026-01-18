@@ -21,7 +21,7 @@ export const GRADES: Grade[] = [
   { id: '17', name: 'ЦТ', slug: '11-klass', order: 12 },
   { id: '18', name: 'ЦЭ', slug: '11-klass', order: 13 },
   { id: '19', name: 'РЦЭ', slug: '11-klass', order: 13 },
-  { id: '20', name: 'ДРТ', slug: '11-klass', order: 14 },
+  { id: '20', name: 'ДРТ', slug: 'drt', order: 14 },
   { id: '21', name: 'РТ', slug: 'rt', order: 15 },
 ];
 
@@ -264,6 +264,15 @@ export const LESSONS: Lesson[] = [
     slug: 'stereo-3',
     gradeId: '12',
     order: 7,
+  },
+
+  //ДРТ
+  {
+    id: '20',
+    title: 'ДРТ 2023',
+    slug: 'drt-2023',
+    gradeId: '20',
+    order: 1,
   },
 
   // РТ
