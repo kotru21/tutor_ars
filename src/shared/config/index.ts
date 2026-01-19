@@ -1,7 +1,7 @@
 import { type Grade, type Lesson } from '../types';
 
 export const SITE_CONFIG = {
-  name: 'Математика | Репетитор',
+  name: 'Математика',
   description: 'Обучающий сайт по математике для учеников 5-11 классов',
   url: process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
 } as const;
@@ -128,6 +128,7 @@ export const LESSONS: Lesson[] = [
     order: 5,
   },
   { id: '9-6', title: 'Функции', slug: 'funktsii', gradeId: '9', order: 6 },
+  { id: '9-7', title: 'Отрезок. Окружность', slug: 'otr-okr', gradeId: '9', order: 7 },
 
   // 10 класс
   { id: '10-1', title: 'Корень n-ой степени', slug: 'koren-n-oj-stepeni', gradeId: '10', order: 1 },
