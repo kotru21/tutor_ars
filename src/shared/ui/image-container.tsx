@@ -10,22 +10,28 @@ interface ImageContainerProps {
   className?: string;
 }
 
-export function ImageContainer({
-  src,
-  alt,
-  width = 600,
-  height = 400,
-  className,
-}: ImageContainerProps) {
+export function ImageContainer({ src, alt, width, height, className }: ImageContainerProps) {
+  const finalWidth = width ?? 600;
+  const finalHeight = height ?? 400;
+
   return (
-    <span className={cn('my-5 flex justify-center', className)}>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className="max-w-full rounded-lg shadow-md"
-      />
-    </span>
+    <div className={cn('my-5 flex justify-center w-full px-4 md:px-0', className)}>
+      <div
+        className="relative w-full"
+        style={{
+          aspectRatio: `${finalWidth}/${finalHeight}`,
+          maxWidth: '100%',
+          maxHeight: '700px',
+        }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="100vw"
+          className="rounded-lg shadow-md object-contain"
+        />
+      </div>
+    </div>
   );
 }
