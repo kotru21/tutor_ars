@@ -20,7 +20,7 @@ export const GRADES: Grade[] = [
   { id: '16', name: 'Не влезай, убьет', slug: '11-klass', order: 11 },
   { id: '17', name: 'ЦТ', slug: '11-klass', order: 12 },
   { id: '18', name: 'ЦЭ', slug: '11-klass', order: 13 },
-  { id: '19', name: 'РЦЭ', slug: '11-klass', order: 13 },
+  { id: '19', name: 'РЦЭ', slug: 'rce', order: 13 },
   { id: '20', name: 'ДРТ', slug: 'drt', order: 14 },
   { id: '21', name: 'РТ', slug: 'rt', order: 15 },
 ];
@@ -268,9 +268,18 @@ export const LESSONS: Lesson[] = [
     order: 7,
   },
 
+  //РЦЭ
+  {
+    id: '19-1',
+    title: 'РЦЭ 2026',
+    slug: 'rce-2026',
+    gradeId: '19',
+    order: 1,
+  },
+
   //ДРТ
   {
-    id: '20',
+    id: '20-1',
     title: 'ДРТ 2023',
     slug: 'drt-2023',
     gradeId: '20',
@@ -279,7 +288,7 @@ export const LESSONS: Lesson[] = [
 
   // РТ
   {
-    id: '21',
+    id: '21-1',
     title: 'РТ 1/1',
     slug: 'rt-1-1',
     gradeId: '21',
@@ -287,7 +296,7 @@ export const LESSONS: Lesson[] = [
   },
 
   {
-    id: '22',
+    id: '21-2',
     title: 'РТ 1/2',
     slug: 'rt-1-2',
     gradeId: '21',
