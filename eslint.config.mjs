@@ -2,10 +2,11 @@
 import { resolve } from 'node:path';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import eslintReact from '@eslint-react/eslint-plugin';
 import nextPlugin from '@next/eslint-plugin-next';
-import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import importPlugin from 'eslint-plugin-import';
+import { importX } from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import boundaries from 'eslint-plugin-boundaries';
 
 const rootDir = resolve(import.meta.dirname);
@@ -19,17 +20,21 @@ export default tseslint.config(
       'build/**',
       'node_modules/**',
       'next-env.d.ts',
+      'scripts/**',
       '*.config.js',
       '*.config.mjs',
+      '*.config.ts',
+      '*.config.mts',
     ],
   },
 
-  // Base ESLint recommended
+  // Base configs
   eslint.configs.recommended,
-
-  // TypeScript ESLint - strict type-checked + stylistic
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+
+  // @eslint-react recommended config
+  eslintReact.configs['recommended-typescript'],
 
   // Main configuration for TypeScript files
   {
@@ -42,50 +47,25 @@ export default tseslint.config(
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
       '@next/next': nextPlugin,
-      react: reactPlugin,
       'react-hooks': reactHooksPlugin,
-      import: importPlugin,
+      'import-x': importX,
       boundaries,
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
-      'import/resolver': {
-        typescript: {
-          project: './tsconfig.json',
-        },
-      },
-      // FSD boundaries configuration
+      'import-x/resolver-next': [
+        createTypeScriptImportResolver({ project: './tsconfig.json' }),
+      ],
       'boundaries/root-path': rootDir,
       'boundaries/elements': [
-        {
-          type: 'app',
-          pattern: 'src/app/**',
-          mode: 'folder',
-        },
-        {
-          type: 'widgets',
-          pattern: 'src/widgets/**',
-          mode: 'folder',
-        },
-        {
-          type: 'features',
-          pattern: 'src/features/**',
-          mode: 'folder',
-        },
-        {
-          type: 'shared',
-          pattern: 'src/shared/**',
-          mode: 'folder',
-        },
+        { type: 'app', pattern: 'src/app/**', mode: 'folder' },
+        { type: 'widgets', pattern: 'src/widgets/**', mode: 'folder' },
+        { type: 'features', pattern: 'src/features/**', mode: 'folder' },
+        { type: 'shared', pattern: 'src/shared/**', mode: 'folder' },
       ],
     },
     rules: {
-      // ===== TypeScript strict rules =====
-      '@typescript-eslint/no-explicit-any': 'error',
+      // ===== TypeScript overrides =====
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
@@ -94,26 +74,23 @@ export default tseslint.config(
         'error',
         { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
       ],
+      '@typescript-eslint/consistent-type-exports': [
+        'error',
+        { fixMixedExportsWithInlineTypeSpecifier: true },
+      ],
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/no-deprecated': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
       '@typescript-eslint/strict-boolean-expressions': 'off',
       '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/restrict-template-expressions': [
         'error',
-        {
-          allowNumber: true,
-          allowBoolean: true,
-        },
+        { allowNumber: true, allowBoolean: true },
       ],
       '@typescript-eslint/no-misused-promises': [
         'error',
-        {
-          checksVoidReturn: {
-            attributes: false,
-          },
-        },
+        { checksVoidReturn: { attributes: false } },
       ],
-      // Relax some strict rules for React patterns
       '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/no-empty-object-type': [
         'error',
@@ -133,29 +110,19 @@ export default tseslint.config(
       'object-shorthand': 'error',
       'prefer-destructuring': [
         'error',
-        {
-          array: false,
-          object: true,
-        },
+        { array: false, object: true },
       ],
 
-      // ===== React rules =====
-      'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
-      'react/self-closing-comp': 'error',
-      'react/jsx-boolean-value': ['error', 'never'],
-      'react/jsx-no-useless-fragment': 'error',
-      'react/jsx-pascal-case': 'error',
-      'react/no-array-index-key': 'warn',
-      'react/hook-use-state': 'error',
+      // ===== React Hooks =====
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
-      // ===== Next.js rules =====
+      // ===== Next.js =====
       '@next/next/no-html-link-for-pages': 'error',
       '@next/next/no-img-element': 'error',
 
-      // ===== Import rules (clean code) =====
-      'import/order': [
+      // ===== Import (eslint-plugin-import-x) =====
+      'import-x/order': [
         'error',
         {
           groups: [
@@ -168,86 +135,47 @@ export default tseslint.config(
             'type',
           ],
           pathGroups: [
-            {
-              pattern: 'react',
-              group: 'builtin',
-              position: 'before',
-            },
-            {
-              pattern: 'next/**',
-              group: 'builtin',
-              position: 'before',
-            },
-            {
-              pattern: '@/app/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@/widgets/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@/features/**',
-              group: 'internal',
-              position: 'before',
-            },
-            {
-              pattern: '@/shared/**',
-              group: 'internal',
-              position: 'after',
-            },
+            { pattern: 'react', group: 'builtin', position: 'before' },
+            { pattern: 'next/**', group: 'builtin', position: 'before' },
+            { pattern: '@/app/**', group: 'internal', position: 'before' },
+            { pattern: '@/widgets/**', group: 'internal', position: 'before' },
+            { pattern: '@/features/**', group: 'internal', position: 'before' },
+            { pattern: '@/shared/**', group: 'internal', position: 'after' },
           ],
           pathGroupsExcludedImportTypes: ['react', 'next'],
           'newlines-between': 'always',
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true,
-          },
+          alphabetize: { order: 'asc', caseInsensitive: true },
         },
       ],
-      'import/no-duplicates': 'error',
-      'import/no-cycle': 'error',
-      'import/no-self-import': 'error',
-      'import/no-useless-path-segments': 'error',
+      'import-x/no-duplicates': 'error',
+      'import-x/no-cycle': 'error',
+      'import-x/no-self-import': 'error',
+      'import-x/no-useless-path-segments': 'error',
 
-      // ===== FSD Boundaries rules =====
+      // ===== FSD Boundaries =====
       'boundaries/element-types': [
         'error',
         {
           default: 'disallow',
-          message: 'Import from "${file.type}" to "${dependency.type}" is not allowed according to FSD rules',
+          message:
+            'Import from "${file.type}" to "${dependency.type}" is not allowed according to FSD rules',
           rules: [
-            // app can import from any layer
-            {
-              from: 'app',
-              allow: ['widgets', 'features', 'shared'],
-            },
-            // widgets can import features, shared
-            {
-              from: 'widgets',
-              allow: ['features', 'shared'],
-            },
-            // features can import shared
-            {
-              from: 'features',
-              allow: ['shared'],
-            },
-            // shared can import only from shared
-            {
-              from: 'shared',
-              allow: ['shared'],
-            },
+            { from: 'app', allow: ['widgets', 'features', 'shared'] },
+            { from: 'widgets', allow: ['features', 'shared'] },
+            { from: 'features', allow: ['shared'] },
+            { from: 'shared', allow: ['shared'] },
           ],
         },
       ],
-      'boundaries/no-unknown': 'warn',
+      'boundaries/no-unknown': 'off',
       'boundaries/no-unknown-files': 'off',
+
+      // ===== React DOM =====
+      '@eslint-react/dom/no-dangerously-set-innerhtml': 'off', // Used safely in math-formula.tsx for KaTeX
     },
   },
 
-  // Configuration for JS config files
+  // JS config files — disable type-checked rules
   {
     files: ['**/*.js', '**/*.mjs'],
     ...tseslint.configs.disableTypeChecked,
