@@ -276,6 +276,14 @@ export const LESSONS: Lesson[] = [
     order: 1,
   },
 
+  {
+    id: '13-2',
+    title: 'Треугольник. Практика 1',
+    slug: 'geom_pract2',
+    gradeId: '13',
+    order: 2,
+  },
+
   //РЦЭ
   {
     id: '19-1',
