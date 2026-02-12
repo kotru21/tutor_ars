@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { GRADES, LESSONS, getGradeBySlug, getLessonBySlug } from '@/shared/config';
-import { getLessonBySlug as getMDXLesson } from '@/shared/lib/mdx';
+import { GRADES, getGradeBySlug } from '@/entities/grade';
+import { LESSONS, getLessonBySlug, getMDXLesson } from '@/entities/lesson';
+
 import { MDXContent } from '@/shared/lib/mdx-components';
 import { BottomNav } from '@/shared/ui';
 

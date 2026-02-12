@@ -75,7 +75,7 @@ math[display='block'] {
   display: block;
   text-align: center;
   margin: 1rem 0;
-  overflow-x: auto;
+  overflow: visible;
 }
 
 /* MDX content styles */
@@ -93,7 +93,6 @@ math[display='block'] {
   padding: 1rem;
   border-radius: 0.5rem;
   margin: 1rem 0;
-  overflow-x: auto;
 }
 
 /* Animations */

@@ -4,9 +4,9 @@ import path from 'path';
 import matter from 'gray-matter';
 import { z } from 'zod';
 
-import { GRADES } from '../config';
+import { GRADES } from '@/entities/grade';
 
-import { slugify } from './utils';
+import { slugify } from '@/shared/lib';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -81,7 +81,7 @@ export function getLessonSlugs(grade: string): string[] {
     .map((file) => file.replace('.mdx', ''));
 }
 
-export function getLessonBySlug(grade: string, slug: string): LessonContent | null {
+export function getMDXLesson(grade: string, slug: string): LessonContent | null {
   const filePath = path.join(contentDirectory, grade, `${slug}.mdx`);
 
   if (!fs.existsSync(filePath)) {
@@ -106,7 +106,7 @@ export function getLessonBySlug(grade: string, slug: string): LessonContent | nu
   };
 }
 
-export function getAllLessons(): LessonContent[] {
+export function getAllMDXLessons(): LessonContent[] {
   const gradeSlugs = [...new Set(GRADES.map((g) => g.slug))];
   const lessons: LessonContent[] = [];
 
@@ -114,7 +114,7 @@ export function getAllLessons(): LessonContent[] {
     const slugs = getLessonSlugs(grade);
 
     for (const slug of slugs) {
-      const lesson = getLessonBySlug(grade, slug);
+      const lesson = getMDXLesson(grade, slug);
       if (lesson) {
         lessons.push(lesson);
       }
@@ -124,12 +124,12 @@ export function getAllLessons(): LessonContent[] {
   return lessons.sort((a, b) => (a.meta.order ?? 0) - (b.meta.order ?? 0));
 }
 
-export function getLessonsByGrade(grade: string): LessonContent[] {
+export function getMDXLessonsByGrade(grade: string): LessonContent[] {
   const slugs = getLessonSlugs(grade);
   const lessons: LessonContent[] = [];
 
   for (const slug of slugs) {
-    const lesson = getLessonBySlug(grade, slug);
+    const lesson = getMDXLesson(grade, slug);
     if (lesson) {
       lessons.push(lesson);
     }

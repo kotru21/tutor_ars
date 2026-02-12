@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+
+import { GRADES, getGradeBySlug } from '@/entities/grade';
+import { getLessonsByGrade } from '@/entities/lesson';
+
 import { LessonList } from '@/widgets';
 
-import { GRADES, getLessonsByGrade, getGradeBySlug } from '@/shared/config';
 import { pluralize } from '@/shared/lib';
 
 import type { Metadata } from 'next';

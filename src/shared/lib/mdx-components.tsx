@@ -1,4 +1,4 @@
-import { type ReactNode, isValidElement, type ReactElement } from 'react';
+import { type ReactNode } from 'react';
 
 import { compileMDX, type MDXRemoteProps } from 'next-mdx-remote/rsc';
 import rehypeKatex from 'rehype-katex';
@@ -15,7 +15,7 @@ import {
 } from '@/shared/ui';
 
 import { remarkImageLinks } from './remark-image-links';
-import { slugify } from './utils';
+import { getPlainText, slugify } from './utils';
 
 interface MdxImgProps {
   src?: string;
@@ -36,21 +36,6 @@ function parseOptionalNumber(value: unknown): number | undefined {
   }
 
   return undefined;
-}
-
-function getPlainText(node: ReactNode): string {
-  if (typeof node === 'string' || typeof node === 'number') {
-    return String(node);
-  }
-  if (Array.isArray(node)) {
-    return node.map(getPlainText).join('');
-  }
-  if (isValidElement(node)) {
-    const element = node as ReactElement;
-    const maybeProps = element as unknown as { props?: { children?: ReactNode } };
-    return getPlainText(maybeProps.props?.children);
-  }
-  return '';
 }
 
 const components = {

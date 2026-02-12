@@ -1,9 +1,10 @@
 import { auth } from '@/features/auth';
 
-import { GradeCard } from '@/widgets';
 
-import { GRADES, getLessonsByGrade } from '@/shared/config';
-import { type GradeCategory } from '@/shared/types';
+import { GRADES, type GradeCategory } from '@/entities/grade';
+import { getLessonsByGrade } from '@/entities/lesson';
+
+import { GradeCard } from '@/widgets';
 
 const CATEGORY_LABELS: Record<GradeCategory, string> = {
   algebra: 'Алгебра',
@@ -38,7 +39,7 @@ export default async function HomePage() {
           <div key={category} className="mb-8">
             <h3 className="mb-4 text-xl font-semibold text-heading">{CATEGORY_LABELS[category]}</h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 animate-stagger">
-              {GRADES.filter((grade) => grade.category === category).map((grade) => {
+              {GRADES.filter((grade) => grade.category === category && !grade.hidden).map((grade) => {
                 const lessons = getLessonsByGrade(grade.id);
                 return (
                   <GradeCard

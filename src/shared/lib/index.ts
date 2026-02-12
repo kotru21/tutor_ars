@@ -1,1 +1,1 @@
-export { cn, pluralize } from './utils';
+export { cn, pluralize, slugify, getPlainText } from './utils';

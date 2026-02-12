@@ -18,6 +18,7 @@ export function BottomNav({ sections, className }: BottomNavProps) {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    event.target.value = '';
   };
 
   return (
