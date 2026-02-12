@@ -15,12 +15,10 @@ export async function authenticate(
     });
   } catch (error) {
     if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Неверный пароль';
-        default:
-          return 'Произошла ошибка при входе';
+      if (error.type === 'CredentialsSignin') {
+        return 'Неверный пароль';
       }
+      return 'Произошла ошибка при входе';
     }
     throw error;
   }
