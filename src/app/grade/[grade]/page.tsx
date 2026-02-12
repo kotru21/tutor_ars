@@ -4,22 +4,15 @@ import { notFound } from 'next/navigation';
 import { LessonList } from '@/widgets';
 
 import { GRADES, getLessonsByGrade, getGradeBySlug } from '@/shared/config';
+import { pluralize } from '@/shared/lib';
 
 import type { Metadata } from 'next';
-
-function getLessonWord(count: number): string {
-  if (count === 1) {
-    return 'тема';
-  }
-  if (count < 5) {
-    return 'темы';
-  }
-  return 'тем';
-}
 
 interface GradePageProps {
   params: Promise<{ grade: string }>;
 }
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return GRADES.map((grade) => ({
@@ -66,7 +59,7 @@ export default async function GradePage({ params }: GradePageProps) {
       <header className="mb-8">
         <h1 className="mb-2 text-3xl font-bold text-heading">{grade.name}</h1>
         <p className="text-gray-600">
-          {lessons.length} {getLessonWord(lessons.length)} доступно
+          {lessons.length} {pluralize(lessons.length, 'тема', 'темы', 'тем')} доступно
         </p>
       </header>
 

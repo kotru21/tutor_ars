@@ -1,1 +1,1 @@
-export { cn } from './utils';
+export { cn, pluralize } from './utils';

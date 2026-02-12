@@ -7,22 +7,25 @@ export const SITE_CONFIG = {
 } as const;
 
 export const GRADES: Grade[] = [
-  { id: '5-6', name: 'Математика 5-6 класс', slug: '5-6-klass', order: 1 },
-  { id: '7', name: 'Алгебра 7 класс', slug: '7-klass', order: 2 },
-  { id: '8', name: 'Алгебра 8 класс', slug: '8-klass', order: 3 },
-  { id: '9', name: 'Алгебра 9 класс', slug: '9-klass', order: 4 },
-  { id: '10', name: 'Алгебра 10 класс', slug: '10-klass', order: 5 },
-  { id: '11', name: 'Алгебра 11 класс', slug: '11-klass', order: 6 },
-  { id: '12', name: 'Геометрия Теория', slug: 'geometry', order: 7 },
-  { id: '13', name: 'Геометрия Практика', slug: 'geometry_practice', order: 8 },
-  { id: '14', name: '#####', slug: '9-klass', order: 9 },
-  { id: '15', name: '#####', slug: '10-klass', order: 10 },
-  { id: '16', name: 'Не влезай, убьет', slug: '11-klass', order: 11 },
-  { id: '17', name: 'ЦТ', slug: '11-klass', order: 12 },
-  { id: '18', name: 'ЦЭ', slug: '11-klass', order: 13 },
-  { id: '19', name: 'РЦЭ', slug: 'rce', order: 13 },
-  { id: '20', name: 'ДРТ', slug: 'drt', order: 14 },
-  { id: '21', name: 'РТ', slug: 'rt', order: 15 },
+  // Алгебра
+  { id: '5-6', name: 'Математика 5-6 класс', slug: '5-6-klass', order: 1, category: 'algebra' },
+  { id: '7', name: 'Алгебра 7 класс', slug: '7-klass', order: 2, category: 'algebra' },
+  { id: '8', name: 'Алгебра 8 класс', slug: '8-klass', order: 3, category: 'algebra' },
+  { id: '9', name: 'Алгебра 9 класс', slug: '9-klass', order: 4, category: 'algebra' },
+  { id: '10', name: 'Алгебра 10 класс', slug: '10-klass', order: 5, category: 'algebra' },
+  { id: '11', name: 'Алгебра 11 класс', slug: '11-klass', order: 6, category: 'algebra' },
+  // Геометрия
+  { id: '12', name: 'Геометрия Теория', slug: 'geometry', order: 7, category: 'geometry' },
+  { id: '13', name: 'Геометрия Практика', slug: 'geometry_practice', order: 8, category: 'geometry' },
+  { id: '14', name: '#####', slug: 'geometry-9', order: 9, category: 'geometry' },
+  { id: '15', name: '#####', slug: 'geometry-10', order: 10, category: 'geometry' },
+  { id: '16', name: 'Не влезай, убьет', slug: 'geometry-11', order: 11, category: 'geometry' },
+  // Экзамены
+  { id: '17', name: 'ЦТ', slug: 'ct', order: 12, category: 'exam' },
+  { id: '18', name: 'ЦЭ', slug: 'ce', order: 13, category: 'exam' },
+  { id: '19', name: 'РЦЭ', slug: 'rce', order: 14, category: 'exam' },
+  { id: '20', name: 'ДРТ', slug: 'drt', order: 15, category: 'exam' },
+  { id: '21', name: 'РТ', slug: 'rt', order: 16, category: 'exam' },
 ];
 
 export const LESSONS: Lesson[] = [
@@ -50,7 +53,7 @@ export const LESSONS: Lesson[] = [
       'Десятичные дроби. Рациональные числа. Модуль. Проценты. Прямая и обратная пропорциональная зависисмости.',
     slug: 'des-drob',
     gradeId: '5-6',
-    order: 2,
+    order: 3,
   },
 
   // 7 класс

@@ -1,17 +1,8 @@
 import Link from 'next/link';
 
+import { pluralize } from '@/shared/lib';
 import { type Grade } from '@/shared/types';
 import { Card } from '@/shared/ui';
-
-function getLessonWord(count: number): string {
-  if (count === 1) {
-    return 'тема';
-  }
-  if (count < 5) {
-    return 'тем';
-  }
-  return 'тем';
-}
 
 interface GradeCardProps {
   grade: Grade;
@@ -27,7 +18,7 @@ export function GradeCard({ grade, lessonsCount, isLocked = false }: GradeCardPr
         {isLocked && <span className="text-xl">🔒</span>}
       </div>
       <p className="text-sm text-gray-600">
-        {lessonsCount} {getLessonWord(lessonsCount)}
+        {lessonsCount} {pluralize(lessonsCount, 'тема', 'темы', 'тем')}
       </p>
     </>
   );

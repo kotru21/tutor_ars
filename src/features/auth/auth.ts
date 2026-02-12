@@ -4,6 +4,10 @@ import { z } from 'zod';
 
 import { authConfig } from './auth.config';
 
+if (!process.env.AUTH_SECRET) {
+  throw new Error('AUTH_SECRET environment variable is required');
+}
+
 const credentialsSchema = z.object({
   password: z.string().min(1, 'Пароль обязателен'),
 });

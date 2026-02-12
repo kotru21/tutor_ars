@@ -10,19 +10,27 @@ export function GET(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Parse code like "7-1", "8-3", "10-2"
   const match = /^(\d{1,2})-(\d{1,2})$/.exec(code);
 
   if (!match) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  const gradeNum = match[1];
-  const lessonNum = parseInt(match[2] ?? '1', 10);
+  const gradeNum = match[1]!;
+  const lessonNum = parseInt(match[2]!, 10);
 
-  // Find grade
-  const grade = GRADES.find((g) => g.id === gradeNum || g.id === `${gradeNum}`);
+  // Try direct grade ID match (e.g. "7", "10")
+  let grade = GRADES.find((g) => g.id === gradeNum);
+
   if (!grade) {
+    // Try compound grade ID (e.g. code "5-6" → grade id "5-6")
+    const compoundId = `${gradeNum}-${match[2]}`;
+    grade = GRADES.find((g) => g.id === compoundId);
+
+    if (grade) {
+      return NextResponse.redirect(new URL(`/grade/${grade.slug}`, request.url));
+    }
+
     return NextResponse.redirect(new URL('/', request.url));
   }
 
@@ -30,7 +38,6 @@ export function GET(request: NextRequest) {
   const lesson = LESSONS.find((l) => l.gradeId === grade.id && l.order === lessonNum);
 
   if (!lesson) {
-    // Redirect to grade page if lesson not found
     return NextResponse.redirect(new URL(`/grade/${grade.slug}`, request.url));
   }
 
